@@ -68,6 +68,7 @@
 
 (global-set-key (kbd "C-c x") 'kill-region) ; Ctrl-c x 'cut'
 
+;; start in terminal
 (defun on-after-init ()
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "#073642" (selected-frame))))
