@@ -3,18 +3,17 @@
 ;;----------------------------------------------------
 ;; startup message at minibuffer
 (defun display-startup-echo-area-message ()
-  (message "Welcome, Hackers!")
-  )
+  (message "Welcome, Hackers!"))
 
 ;; formatting line numbers
 (require 'linum)
 
 (global-linum-mode 1)
 
-; optional formatting to make line numbers prettier
-(setq linum-format "%d ")
-
-
+;; optional formatting to make line numbers prettier
+;;(setq linum-format "%03d \u2502 ")
+(setq linum-format "%03d ")
+	  
 (setq inhibit-startup-message t) ; stop startup message
 
 (set-default-font "Bitstream Vera Sans Mono-11") ; set default font
@@ -29,7 +28,7 @@
 
 (setq auto-save-default nil) ; stop creating #autosave# files
 
-(set-fringe-style 1) ; fringe
+(set-fringe-style 0) ; no fringe
 
 (require 'ansi-color) ; full color
 
@@ -43,6 +42,8 @@
 
 (global-set-key (kbd "C-c s") 'save-buffer) ; Ctrl-c s 'save'
 
+(global-set-key (kbd "C-c m") 'set-mark-command) ; Ctrl-c m 'mark'
+
 (global-set-key (kbd "C-c c") 'kill-ring-save) ; Ctrl-c c 'copy' 
 
 (global-set-key (kbd "C-c v") 'yank) ; Ctrl-c v 'paste'
@@ -51,7 +52,9 @@
 
 (global-set-key (kbd "C-c a") 'mark-whole-buffer) ; Ctrl-c a 'block all text'
 
-(global-set-key (kbd "C-c j") 'other-window) ; Ctrl-c j 'move cursor to other window'
+(global-set-key (kbd "C-c j") 'other-window) ; Ctrl-c j 'move cursor to another window'
+
+(global-set-key (kbd "C-c e") 'kill-line) ; Ctrl-c e 'delete line' 
 
 (global-set-key (kbd "C-c k") 'kill-buffer) ; Ctrl-c k 'close'
 
@@ -64,10 +67,6 @@
 (global-set-key (kbd "C-c r") 'rename-file) ; Ctrl-c r 'rename'
 
 (global-set-key (kbd "C-c x") 'kill-region) ; Ctrl-c x 'cut'
-
-(global-set-key (kbd "C-c C-g") 'magit-status) ;  Ctrl-c g
-
-(global-set-key (kbd "C-c C-p") 'magit-dispatch-popup) ; Ctrl-c p
 
 (defun on-after-init ()
   (unless (display-graphic-p (selected-frame))
@@ -122,7 +121,7 @@
 (setq initial-major-mode (quote text-mode)) ; save text to mode text
 
 (require 'easymenu)
-    (easy-menu-add-item nil '("tools") ["IRC" erc-select t]) ; menu IRC
+    (easy-menu-add-item nil '("tools") ["IRC" erc-select t]) ; menu IRC at Tools bar
 
 ;; For CC Mode (C, C++, Java et. al.)
 (setq-default tab-width 4) ; or any other preferred value
@@ -227,3 +226,4 @@
 (set-face-attribute 'linum nil
 					:foreground "#eee8d5"
 					:background "#073642")
+(put 'upcase-region 'disabled nil)
