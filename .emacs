@@ -227,4 +227,3 @@
 (set-face-attribute 'linum nil
 					:foreground "#eee8d5"
 					:background "#073642")
-(put 'upcase-region 'disabled nil)
