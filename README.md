@@ -4,7 +4,7 @@
 ```
 	git clone https://github.com/Raviyanto/Emacs_Config.git
 ```
-## 2. Install Font
+## 2. Install Fonts
 ```
          $ cd Emacs_Config
 	 $ cp -R bitstream_vera_mono ~/.local/share/fonts
