@@ -6,7 +6,7 @@
 ```
 ## 2. Install Font
 ```
-     $ cd Emacs_Config
+         $ cd Emacs_Config
 	 $ cp -R bitstream_vera_mono ~/.local/share/fonts
 	 $ cd $HOME
 	 $ fc-cache -f -v
