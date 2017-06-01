@@ -14,7 +14,7 @@
 ## 3. Install Emacs Configuration
 ```
 	$ cd Emacs_Config
-	$ cp moe-theme.el vendor ~/.emacs.d
+	$ cp -R moe-theme.el vendor ~/.emacs.d
 	$ cp .emacs $HOME
 ```
 ## 4. Image Appearance 
