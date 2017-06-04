@@ -7,10 +7,10 @@
 ```
 ## 2. Install Fonts
 ```
-     $ cd Emacs_Config
-	 $ cp -R bitstream_vera_mono ~/.local/share/fonts
-	 $ cd $HOME
-	 $ fc-cache -f -v
+	$ cd Emacs_Config
+	$ cp -R bitstream_vera_mono ~/.local/share/fonts
+	$ cd $HOME
+	$ fc-cache -f -v
 ```
 ## 3. Install Emacs Configuration
 ```
