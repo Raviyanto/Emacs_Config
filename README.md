@@ -15,11 +15,8 @@
 ## 3. Install Emacs Configuration
 ```
 	$ cd Emacs_Config
-	$ cp -R moe-theme.el vendor ~/.emacs.d
+	$ cp -R solarmoe-theme vendor ~/.emacs.d
 	$ cp .emacs $HOME
 ```
 ## 4. Image Appearance 
 ![Image Startup](https://github.com/Raviyanto/Emacs_Config/blob/master/screenshot_emacs.png  "Startup Emacs")
-
-
-Kamis, 01. Juni 2017 08:41 
