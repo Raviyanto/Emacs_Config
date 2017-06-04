@@ -92,9 +92,9 @@
 (setq show-paren-style 'parenthesis) ; highlight brackets
 
 ;; Moe-theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/moe-theme.el/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/solarmoe-theme/")
 
-(add-to-list 'load-path "~/.emacs.d/moe-theme.el/")
+(add-to-list 'load-path "~/.emacs.d/solarmoe-theme/")
 
 (require 'moe-theme)
 
@@ -107,7 +107,6 @@
 (moe-theme-set-color 'w/b)
 
 ;; Finally, apply moe-theme now.
-;; Choose what you like, (moe-light) or (moe-dark)
 (moe-dark)
 
 ;; install package from Melpa
