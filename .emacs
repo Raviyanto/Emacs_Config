@@ -1,7 +1,7 @@
 ;; For Emacs Lover by @Raviyanto
 ;; Ciputat-Indonesia Ramadhan @2017
 ;;----------------------------------------------------
-;; startup message at minibuffer
+
 (defun display-startup-echo-area-message ()
   (message "Welcome, Hackers!"))
 
@@ -42,7 +42,7 @@
 
 (global-set-key (kbd "C-c s") 'save-buffer) ; Ctrl-c s 'save'
 
-(global-set-key (kbd "C-c m") 'set-mark-command) ; Ctrl-c m 'mark'
+(global-set-key (kbd "C-c b") 'set-mark-command) ; Ctrl-c m 'block area'
 
 (global-set-key (kbd "C-c c") 'kill-ring-save) ; Ctrl-c c 'copy' 
 
@@ -68,6 +68,8 @@
 
 (global-set-key (kbd "C-c x") 'kill-region) ; Ctrl-c x 'cut'
 
+(global-set-key (kbd "C-c m") 'livedown-preview) ; Ctrl-c m 'mark'
+
 ;; start in terminal
 (defun on-after-init ()
   (unless (display-graphic-p (selected-frame))
@@ -83,6 +85,12 @@
 
 (require 'cl)
 
+(setq powerline-arrow-shape 'curve)   ; give your mode-line curves
+
+(show-paren-mode t) ; paren mode
+
+(setq show-paren-style 'parenthesis) ; highlight brackets
+
 ;; Moe-theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/moe-theme.el/")
 
@@ -91,12 +99,12 @@
 (require 'moe-theme)
 
 ;;Show highlighted buffer-id as decoration. (Default: nil)
-(setq moe-theme-highlight-buffer-id t)
+(setq moe-theme-highlight-buffer-id nil)
 
 (setq moe-light-pure-white-background-in-terminal t)
 
 ;; Choose a color for mode-line.(Default: blue)
-(moe-theme-set-color 'blue)
+(moe-theme-set-color 'w/b)
 
 ;; Finally, apply moe-theme now.
 ;; Choose what you like, (moe-light) or (moe-dark)
@@ -123,6 +131,11 @@
 
 (require 'easymenu)
     (easy-menu-add-item nil '("tools") ["IRC" erc-select t]) ; menu IRC at Tools bar
+
+;; Color comments
+(set-face-foreground 'font-lock-string-face "yellow")
+
+(set-face-foreground 'font-lock-comment-face "light pink")
 
 ;; For CC Mode (C, C++, Java et. al.)
 (setq-default tab-width 4) ; or any other preferred value
@@ -215,6 +228,8 @@
 
 ;; split window right
 (split-window-right)
+
+(setq split-height-threshold nil)
 
 ;; python Emacs
 (add-hook 'python-mode-hook 'jedi:setup)
