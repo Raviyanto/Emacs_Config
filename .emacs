@@ -1,17 +1,16 @@
 ;; For Emacs Lover by @Raviyanto
 ;; Ciputat-Indonesia Ramadhan @2017
 ;;----------------------------------------------------
-
 (defun display-startup-echo-area-message ()
   (message "Welcome, Hackers!"))
 
-;; formatting line numbers
+;; Formatting line numbers
 (require 'linum)
-
 (global-linum-mode 1)
+(line-number-mode t)
+(column-number-mode t)
 
-;; optional formatting to make line numbers prettier
-;;(setq linum-format "%03d \u2502 ")
+;; Optional formatting to make line numbers prettier
 (setq linum-format "%03d ")
 	  
 (setq inhibit-startup-message t) ; stop startup message
@@ -34,73 +33,50 @@
 
 (global-hl-line-mode 1) ;hightlight line
 
+;; Parenthesis
+(show-paren-mode t) ; paren mode
+(setq show-paren-style 'parenthesis) ; highlight brackets
+
+;; Short cut setting
 (global-set-key (kbd "C-c o") 'ido-find-file) ; Ctrl-c o 'open file'
-
 (global-set-key (kbd "C-c f") 'find-file) ; Ctrl-c f 'open file'
-
 (global-set-key (kbd "C-c q") 'save-buffers-kill-terminal) ; Ctrl-c q 'quit'
-
 (global-set-key (kbd "C-c s") 'save-buffer) ; Ctrl-c s 'save'
-
-(global-set-key (kbd "C-c b") 'set-mark-command) ; Ctrl-c m 'block area'
-
+(global-set-key (kbd "C-c b") 'set-mark-command) ; Ctrl-c b 'block area'
 (global-set-key (kbd "C-c c") 'kill-ring-save) ; Ctrl-c c 'copy' 
-
 (global-set-key (kbd "C-c v") 'yank) ; Ctrl-c v 'paste'
-
 (global-set-key (kbd "C-c w") 'write-file) ; Ctrl-c w 'save as'
-
 (global-set-key (kbd "C-c a") 'mark-whole-buffer) ; Ctrl-c a 'block all text'
-
 (global-set-key (kbd "C-c j") 'other-window) ; Ctrl-c j 'move cursor to another window'
-
 (global-set-key (kbd "C-c e") 'kill-line) ; Ctrl-c e 'delete line' 
-
 (global-set-key (kbd "C-c k") 'kill-buffer) ; Ctrl-c k 'close'
-
 (global-set-key (kbd "C-c i") 'insert-file) ; Ctrl-c i 'insert file'
-
 (global-set-key (kbd "C-c u") 'undo) ; Ctrl-c u 'undo'
-
 (global-set-key (kbd "C-c d") 'dired) ; Ctrl-c d 'open directory'
-
-(global-set-key (kbd "C-c r") 'rename-file) ; Ctrl-c r 'rename'
-
+(global-set-key (kbd "C-c n") 'rename-file) ; Ctrl-c n 'rename'
 (global-set-key (kbd "C-c x") 'kill-region) ; Ctrl-c x 'cut'
-
-(global-set-key (kbd "C-c m") 'livedown-preview) ; Ctrl-c m 'mark'
-
-;; start in terminal
+(global-set-key (kbd "C-c r") 'replace-string) ; Ctrl-c r 'replace'
+		
+;; Start in terminal
 (defun on-after-init ()
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "#073642" (selected-frame))))
-
 (add-hook 'window-setup-hook 'on-after-init)
 
 ;; If you want to use powerline, (require 'powerline) must be
 ;; before (require 'moe-theme).
-(add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
-
+(add-to-list 'load-path "~/.emacs.d/emacs-powerline")
 (require 'powerline)
-
 (require 'cl)
-
 (setq powerline-arrow-shape 'curve)   ; give your mode-line curves
-
-(show-paren-mode t) ; paren mode
-
-(setq show-paren-style 'parenthesis) ; highlight brackets
 
 ;; Moe-theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/solarmoe-theme/")
-
 (add-to-list 'load-path "~/.emacs.d/solarmoe-theme/")
-
 (require 'moe-theme)
 
 ;;Show highlighted buffer-id as decoration. (Default: nil)
 (setq moe-theme-highlight-buffer-id nil)
-
 (setq moe-light-pure-white-background-in-terminal t)
 
 ;; Choose a color for mode-line.(Default: blue)
@@ -109,17 +85,14 @@
 ;; Finally, apply moe-theme now.
 (moe-dark)
 
-;; install package from Melpa
+;; Install package from Melpa
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-;; Forces the messages to 0, and kills the *Messages* buffer - thus disabling it 
-;; on startup.
+;; Forces the messages to 0, and kills the *Messages* buffer - thus disabling it on startup.
 (setq-default message-log-max nil)
-
 (kill-buffer "*Messages*")
-
 (kill-buffer "*scratch*")
 
 (setq inhibit-splash-screen t)
@@ -133,79 +106,12 @@
 
 ;; Color comments
 (set-face-foreground 'font-lock-string-face "yellow")
-
 (set-face-foreground 'font-lock-comment-face "light pink")
 
-;; For CC Mode (C, C++, Java et. al.)
-(setq-default tab-width 4) ; or any other preferred value
-(setq cua-auto-tabify-rectangles nil)
-
-(defadvice align (around smart-tabs activate)
-  (let ((indent-tabs-mode nil)) ad-do-it))
-
-(defadvice align-regexp (around smart-tabs activate)
-  (let ((indent-tabs-mode nil)) ad-do-it))
-
-(defadvice indent-relative (around smart-tabs activate)
-  (let ((indent-tabs-mode nil)) ad-do-it))
-
-(defadvice indent-according-to-mode (around smart-tabs activate)
-  (let ((indent-tabs-mode indent-tabs-mode))
-    (if (memq indent-line-function
-              '(indent-relative
-                indent-relative-maybe))
-        (setq indent-tabs-mode nil))
-    ad-do-it))
-
-(defmacro smart-tabs-advice (function offset)
-  `(progn
-     (defvaralias ',offset 'tab-width)
-     (defadvice ,function (around smart-tabs activate)
-       (cond
-        (indent-tabs-mode
-         (save-excursion
-           (beginning-of-line)
-           (while (looking-at "\t*\\( +\\)\t+")
-             (replace-match "" nil nil nil 1)))
-         (setq tab-width tab-width)
-         (let ((tab-width fill-column)
-               (,offset fill-column)
-               (wstart (window-start)))
-           (unwind-protect
-               (progn ad-do-it)
-             (set-window-start (selected-window) wstart))))
-        (t
-         ad-do-it)))))
-
-(smart-tabs-advice c-indent-line c-basic-offset)
-(smart-tabs-advice c-indent-region c-basic-offset)
-
-;; For Js2Mode
-(smart-tabs-advice js2-indent-line js2-basic-offset)
-
-;; For CPerlMode
-(smart-tabs-advice cperl-indent-line cperl-indent-level)
-
-;; For python.el
-(smart-tabs-advice python-indent-line-1 python-indent)
-    (add-hook 'python-mode-hook
-              (lambda ()
-                (setq indent-tabs-mode t)
-                (setq tab-width (default-value 'tab-width))))
-
-;; For python-mode.el
-(smart-tabs-advice py-indent-line py-indent-offset)
-(smart-tabs-advice py-newline-and-indent py-indent-offset)
-(smart-tabs-advice py-indent-region py-indent-offset)
-
-;; For RubyMode
-(smart-tabs-advice ruby-indent-line ruby-indent-level)
-(setq ruby-indent-tabs-mode t)
-
-;; shell buffer
+;; Shell buffer
 (setq buffer-file-name nil)
 
-;; clear eshell
+;; Clear eshell
 (defun eshell-clear-buffer ()
   "Clear terminal"
   (interactive)
@@ -216,28 +122,68 @@
       '(lambda()
           (local-set-key (kbd "C-l") 'eshell-clear-buffer)))
 
-;; word wrap
+;; Word wrap
 (global-visual-line-mode 1)
 
-;; whitespace
+;; Whitespace
 (require 'whitespace)
 (setq whitespace-line-column 70) ;; limit line length
 (setq whitespace-style '(face lines-tail))
 (global-whitespace-mode +1)
 
-;; split window right
+;; Split window right
 (split-window-right)
-
 (setq split-height-threshold nil)
-
-;; python Emacs
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-
-;; Must have org-mode loaded before we can configure org-babel
-(require 'org-install)
 
 ;; Color number
 (set-face-attribute 'linum nil
 					:foreground "#eee8d5"
 					:background "#073642")
+
+;; Setting Ruby mode
+(add-to-list 'load-path "~/.emacs.d/ruby-mode")
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
+(autoload 'ruby-mode "ruby-mode" "Major mode for editing Ruby code" t)
+(add-hook 'ruby-mode-hook (lambda () (local-set-key "\r" 'newline-and-indent)))
+(require 'inf-ruby)
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
+
+;; Setting Python mode
+(add-to-list 'load-path "~/.emacs.d/python-mode")
+(require 'python)
+
+;; Run Python in inferior process
+(defun run-python-once ()
+  (remove-hook 'python-mode-hook 'run-python-once)
+  (run-python (python-shell-parse-command)))
+(add-hook 'python-mode-hook 'run-python-once)
+
+;; Setting PHP mode
+(add-to-list 'load-path "~/.emacs.d/php-mode")
+(require 'php-mode)
+(add-to-list 'load-path "~/.emacs.d/php-mode/skeleton")
+(eval-after-load 'php-mode
+  '(require 'php-ext))
+(add-hook 'php-mode-hook 'php-enable-default-coding-style)
+(add-hook 'php-mode-hook (lambda () (subword-mode 1)))
+
+;; Setting Perl mode
+(defalias 'perl-mode 'cperl-mode)
+
+;; Setting C++ mode
+(setq-default c-indent-tabs-mode t     ; Pressing TAB should cause indentation
+                c-indent-level 4         ; A TAB is equivilent to four spaces
+                c-argdecl-indent 0       ; Do not indent argument decl's extra
+                c-tab-always-indent t
+                backward-delete-function nil) ; DO NOT expand tabs when deleting
+  (c-add-style "my-c-style" '((c-continued-statement-offset 4))) ; If a statement continues on the next line, indent the continuation by 4
+  (defun my-c-mode-hook ()
+    (c-set-style "my-c-style")
+    (c-set-offset 'substatement-open '0) ; brackets should be at same indentation level as the statements they open
+    (c-set-offset 'inline-open '+)
+    (c-set-offset 'block-open '+)
+    (c-set-offset 'brace-list-open '+)   ; all "opens" should be indented by the c-indent-level
+    (c-set-offset 'case-label '+))       ; indent case labels by c-indent-level, too
+  (add-hook 'c-mode-hook 'my-c-mode-hook)
+  (add-hook 'c++-mode-hook 'my-c-mode-hook)

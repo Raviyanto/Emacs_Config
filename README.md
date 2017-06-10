@@ -15,8 +15,8 @@
 ## 3. Install Emacs Configuration
 ```
 	$ cd Emacs_Config
-	$ cp -R solarmoe-theme vendor ~/.emacs.d
+	$ cp -R emacs-powerline php-mode python-mode ruby-mode solarmoe-theme  ~/.emacs.d
 	$ cp .emacs $HOME
 ```
 ## 4. Image Appearance 
-![Image Startup](https://github.com/Raviyanto/Emacs_Config/blob/master/screenshot_emacs.png  "Startup Emacs")
+![Image Startup](https://github.com/Raviyanto/Emacs_Config/blob/master/screenshot_emacs.png  "Startup Emacs image")
