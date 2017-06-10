@@ -11,14 +11,14 @@ There are a number of ways to do this correctly.  If you're comfortable with doi
 
 ::
 
-    $ cd ~/.emacs.d/vendor
+    $ cd ~/.emacs.d/
     $ git clone git://github.com/jonathanchu/emacs-powerline.git
 
 In your Emacs config:
 
 ::
 
-    (add-to-list 'load-path "~/.emacs.d/vendor/emacs-powerline")
+    (add-to-list 'load-path "~/.emacs.d/emacs-powerline")
     (require 'powerline)
 
 *Note: Depending on what distribution of Emacs you're using, you might have to do:*
