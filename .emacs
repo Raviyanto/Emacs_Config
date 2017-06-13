@@ -152,6 +152,7 @@
 ;; Setting Python mode
 (add-to-list 'load-path "~/.emacs.d/python-mode")
 (require 'python)
+(add-hook 'python-mode-hook '(lambda () (define-key python-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Run Python in inferior process
 (defun run-python-once ()
@@ -172,9 +173,9 @@
 (defalias 'perl-mode 'cperl-mode)
 
 ;; Setting C++ mode
-(setq-default c-indent-tabs-mode t     ; Pressing TAB should cause indentation
-                c-indent-level 4         ; A TAB is equivilent to four spaces
-                c-argdecl-indent 0       ; Do not indent argument decl's extra
+(setq-default c-indent-tabs-mode t ; Pressing TAB should cause indentation
+                c-indent-level 4 ; A TAB is equivilent to four spaces
+                c-argdecl-indent 0 ; Do not indent argument decl's extra
                 c-tab-always-indent t
                 backward-delete-function nil) ; DO NOT expand tabs when deleting
   (c-add-style "my-c-style" '((c-continued-statement-offset 4))) ; If a statement continues on the next line, indent the continuation by 4
@@ -186,4 +187,50 @@
     (c-set-offset 'brace-list-open '+)   ; all "opens" should be indented by the c-indent-level
     (c-set-offset 'case-label '+))       ; indent case labels by c-indent-level, too
   (add-hook 'c-mode-hook 'my-c-mode-hook)
-  (add-hook 'c++-mode-hook 'my-c-mode-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-hook)
+
+;; Setting html mode
+(add-to-list 'load-path "~/.emacs.d/html-mode")
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(setq web-mode-style-padding 1)
+(setq web-mode-script-padding 1)
+(setq web-mode-block-padding 0)
+(setq web-mode-comment-style 2)
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-css-colorization t)
+(add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+(add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+(add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+(add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
+
+(setq web-mode-extra-snippets
+      '(("erb" . (("toto" . "<% toto | %>\n\n<% end %>")))
+        ("php" . (("dowhile" . "<?php do { ?>\n\n<?php } while (|); ?>")
+                  ("debug" . "<?php error_log(__LINE__); ?>")))
+	))
+
+(setq web-mode-extra-auto-pairs
+      '(("erb"  . (("beg" "end")))
+        ("php"  . (("beg" "end")
+                   ("beg" "end")))
+	))
+
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-css-colorization t)
+(setq web-mode-enable-block-face t)
+(setq web-mode-enable-part-face t)
+(setq web-mode-enable-comment-keywords t)
+(setq web-mode-enable-heredoc-fontification t)
+(setq web-mode-enable-current-element-highlight t)
+(setq web-mode-enable-current-column-highlight t)
