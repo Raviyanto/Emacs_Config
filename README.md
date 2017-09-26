@@ -15,7 +15,7 @@
 ## 3. Install Emacs Configuration
 ```
 	$ cd Emacs_Config
-	$ cp -R emacs-powerline html-mode php-mode python-mode ruby-mode solarmoe-theme  ~/.emacs.d
+	$ cp -R eshell powerline-mode html-mode php-mode python-mode ruby-mode zenburn-theme  ~/.emacs.d
 	$ cp .emacs $HOME
 ```
 ## 4. Image Appearance 

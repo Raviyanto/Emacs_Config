@@ -1,0 +1,128 @@
+ls
+./halo 
+rav++ halo.cpp -o hola
+ls
+rav++ halo.cpp -o hola
+ls
+./hola 
+rav++ halo.cpp -o holo
+ls
+./holo
+rav++ halo.cpp -o holo
+./holo
+rav++ halo.cpp -o holo
+./holo 
+rav++ halo.cpp -o holo
+./holo 
+ls
+rav++ 
+cd Cplus-plus/
+ls
+rav++ halo.cpp -o joli
+ls
+./joli 
+pyenv versions
+cd
+cd .phpenv/
+ls
+cd shims/
+ls
+cd ..
+ls
+cd bin/
+ls
+cd
+cd .pyenv/
+ls
+cd shims/
+ls
+./pip3
+ls
+python3
+cd
+python3
+pip3 --help
+pip3
+pip
+cp
+ls
+ll
+chmod
+chmod --help
+/bin/chmod
+/bin/cp
+cp
+rm
+ls
+ls --help
+chown
+/bin/chown --help
+/bin/cp --help
+/bin/ls --help
+cd .pyenv/
+ls
+cd bin
+ls
+pyenv
+cd
+/.pyenv/bin
+pwd
+cd .pyenv/
+ls
+cd bin
+ls
+./pyenv 
+./pyenv versions
+./pyenv install --list
+time
+time -h
+rmdir
+mv
+alias
+popd
+pushd
+ln
+env
+du
+man ls
+man ll
+man rm
+info
+whoami
+sudo apt update
+alias
+alias
+ls
+ls pyenv 
+ls pyenv 
+ssh
+ls
+./pyenv versions
+ls
+pwd
+ls
+more rah.txt
+rav++
+pwd
+ls
+ls
+cd Cplus-plus/
+ls
+./holo
+clear
+
+cls
+clr
+ls
+ls
+mpsyt
+cd .pyenv/
+ls
+cd shims/
+ls
+mpsyt
+./mpsyt
+~/.pyenv/shims/mpsyt 
+ls
+cd .emacs.d/
+ls

@@ -1,6 +1,8 @@
 ;; For Emacs Lover by @Raviyanto
 ;; Ciputat-Indonesia Ramadhan @2017
 ;;----------------------------------------------------
+
+;; Display startup echo area message
 (defun display-startup-echo-area-message ()
   (message "Welcome, Hackers!"))
 
@@ -9,6 +11,9 @@
 (global-linum-mode 1)
 (line-number-mode t)
 (column-number-mode t)
+
+;; Alias
+(defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
 
 ;; Optional formatting to make line numbers prettier
 (setq linum-format "%03d ")
@@ -57,33 +62,17 @@
 (global-set-key (kbd "C-c x") 'kill-region) ; Ctrl-c x 'cut'
 (global-set-key (kbd "C-c r") 'replace-string) ; Ctrl-c r 'replace'
 		
-;; Start in terminal
-(defun on-after-init ()
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "#073642" (selected-frame))))
-(add-hook 'window-setup-hook 'on-after-init)
+;; Zenburn-theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/zenburn-theme/")
+(load-theme 'zenburn t)
 
-;; If you want to use powerline, (require 'powerline) must be
-;; before (require 'moe-theme).
-(add-to-list 'load-path "~/.emacs.d/emacs-powerline")
+;; Powerline
+(add-to-list 'load-path "~/.emacs.d/powerline-mode/")
 (require 'powerline)
-(require 'cl)
-(setq powerline-arrow-shape 'curve)   ; give your mode-line curves
-
-;; Moe-theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/solarmoe-theme/")
-(add-to-list 'load-path "~/.emacs.d/solarmoe-theme/")
-(require 'moe-theme)
-
-;;Show highlighted buffer-id as decoration. (Default: nil)
-(setq moe-theme-highlight-buffer-id nil)
-(setq moe-light-pure-white-background-in-terminal t)
-
-;; Choose a color for mode-line.(Default: blue)
-(moe-theme-set-color 'w/b)
-
-;; Finally, apply moe-theme now.
-(moe-dark)
+(setq powerline-arrow-shape 'arrow)
+(custom-set-faces
+ '(mode-line ((t (:foreground "#030303" :background "#bdbdbd" :box nil))))
+ '(mode-line-inactive ((t (:foreground "#f9f9f9" :background "#666666" :box nil)))))
 
 ;; Install package from Melpa
 (require 'package)
@@ -120,7 +109,14 @@
     (eshell-send-input)))
 (add-hook 'eshell-mode-hook
       '(lambda()
-          (local-set-key (kbd "C-l") 'eshell-clear-buffer)))
+          (local-set-key (kbd "C-c l") 'eshell-clear-buffer)))
+
+;; Smart Eshell
+(require 'eshell)
+(require 'em-smart)
+(setq eshell-where-to-jump 'begin)
+(setq eshell-review-quick-commands nil)
+(setq eshell-smart-space-goes-to-end t)
 
 ;; Word wrap
 (global-visual-line-mode 1)
@@ -134,11 +130,6 @@
 ;; Split window right
 (split-window-right)
 (setq split-height-threshold nil)
-
-;; Color number
-(set-face-attribute 'linum nil
-					:foreground "#eee8d5"
-					:background "#073642")
 
 ;; Setting Ruby mode
 (add-to-list 'load-path "~/.emacs.d/ruby-mode")
