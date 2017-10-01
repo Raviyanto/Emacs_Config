@@ -2,7 +2,6 @@
 ;; Ciputat-Indonesia Ramadhan @2017
 ;;----------------------------------------------------
 
-;; Display startup echo area message
 (defun display-startup-echo-area-message ()
   (message "Welcome, Hackers!"))
 
@@ -17,7 +16,7 @@
 
 ;; Optional formatting to make line numbers prettier
 (setq linum-format "%03d ")
-	  
+
 (setq inhibit-startup-message t) ; stop startup message
 
 (set-default-font "Bitstream Vera Sans Mono-11") ; set default font
@@ -35,8 +34,6 @@
 (set-fringe-style 0) ; no fringe
 
 (require 'ansi-color) ; full color
-
-(global-hl-line-mode 1) ;hightlight line
 
 ;; Parenthesis
 (show-paren-mode t) ; paren mode
@@ -71,6 +68,10 @@
 (require 'powerline)
 (setq powerline-arrow-shape 'arrow)
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(mode-line ((t (:foreground "#030303" :background "#bdbdbd" :box nil))))
  '(mode-line-inactive ((t (:foreground "#f9f9f9" :background "#666666" :box nil)))))
 
@@ -96,6 +97,11 @@
 ;; Color comments
 (set-face-foreground 'font-lock-string-face "yellow")
 (set-face-foreground 'font-lock-comment-face "light pink")
+
+;; Color hightlight
+(global-hl-line-mode t) ;; To enable
+(set-face-background 'hl-line "navy") ;; change with the color that you like
+(set-face-attribute 'region nil :background "blue")
 
 ;; Shell buffer
 (setq buffer-file-name nil)
@@ -139,17 +145,6 @@
 (require 'inf-ruby)
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
-
-;; Setting Python mode
-(add-to-list 'load-path "~/.emacs.d/python-mode")
-(require 'python)
-(add-hook 'python-mode-hook '(lambda () (define-key python-mode-map "\C-m" 'newline-and-indent)))
-
-;; Run Python in inferior process
-(defun run-python-once ()
-  (remove-hook 'python-mode-hook 'run-python-once)
-  (run-python (python-shell-parse-command)))
-(add-hook 'python-mode-hook 'run-python-once)
 
 ;; Setting PHP mode
 (add-to-list 'load-path "~/.emacs.d/php-mode")
@@ -225,3 +220,8 @@
 (setq web-mode-enable-heredoc-fontification t)
 (setq web-mode-enable-current-element-highlight t)
 (setq web-mode-enable-current-column-highlight t)
+
+;; Setting Python Mode
+(add-to-list 'load-path "~/.emacs.d/python-mode/") 
+(setq py-install-directory "~/.emacs.d/python-mode/")
+(require 'python-mode)
